@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "696895611407",
+    "firebase_url": "https://tablestat-c3ad8-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tablestat-c3ad8",
+    "storage_bucket": "tablestat-c3ad8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696895611407:android:a6f1f99745cb46650fb97a",
+        "android_client_info": {
+          "package_name": "com.example.table_stat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf6bfwLKk-coZ8ETOIUqTfbQna1AngaVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
