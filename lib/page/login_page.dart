@@ -32,21 +32,23 @@ class _LoginPageState extends State<LoginPage> {
           .listen((event) {
         DataSnapshot snapshot = event.snapshot;
 
-        UserProvider userProvider = Provider.of<UserProvider>(
-          context,
-          listen: false,
-        );
-        final List<Object?> comanderMap =
-            snapshot.child("commanders").value as List<Object?>;
+        if (mounted) {
+          UserProvider userProvider = Provider.of<UserProvider>(
+            context,
+            listen: false,
+          );
+          final List<Object?> comanderMap =
+              snapshot.child("commanders").value as List<Object?>;
 
-        userProvider.setUser(UserModel(
-          uid: userCredential.user!.uid,
-          username: snapshot.child("username").value.toString(),
-          commanders: List.generate(
-            comanderMap.length,
-            (index) => comanderMap[index].toString(),
-          ),
-        ));
+          userProvider.setUser(UserModel(
+            uid: userCredential.user!.uid,
+            username: snapshot.child("username").value.toString(),
+            commanders: List.generate(
+              comanderMap.length,
+              (index) => comanderMap[index].toString(),
+            ),
+          ));
+        }
       });
 
       if (mounted) Navigator.pushReplacementNamed(context, '/dashboard');

@@ -35,14 +35,17 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
   void createGame() {
     gameId = generateGameId();
+    userProvider.setGameId(gameId);
 
     DatabaseReference databaseReference = FirebaseDatabase.instance
         .ref()
         .child("root")
         .child('Games')
-        .child(gameId);
+        .child(gameId)
+        .child('listenableData');
 
     databaseReference.set({
+      "turn": '0',
       "nbPlayer": numberOfPlayerController.text,
       "status": "waiting",
     });
@@ -54,12 +57,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       final Map<Object?, Object?> users =
           snapshot.child("Users").value as Map<Object?, Object?>;
 
-      print(users);
       _playerList.clear();
 
       users.map((key, value) {
         final Map<Object?, Object?> data = value as Map<Object?, Object?>;
-        print(data["name"].toString());
 
         _playerList.add({
           "name": data["name"].toString(),
@@ -68,8 +69,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
         return MapEntry(key, value);
       });
-
-      print("PLAYER LIST => $_playerList");
 
       if (mounted) setState(() {});
       if (_playerList.isNotEmpty &&
@@ -88,6 +87,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         .child('root')
         .child('Games')
         .child(gameId)
+        .child('listenableData')
         .child('Users');
     gameRef.update({
       curentUser.uid: {
@@ -103,7 +103,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
         .ref()
         .child('root')
         .child('Games')
-        .child(gameId);
+        .child(gameId)
+        .child('listenableData');
 
     gameRef.update({
       "status": "playing",

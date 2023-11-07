@@ -28,11 +28,14 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
   }
 
   void joinGame(String gameId, UserModel curentUser, String commanderName) {
+    userProvider.setGameId(gameId);
+
     gameRef = FirebaseDatabase.instance
         .ref()
         .child('root')
         .child('Games')
-        .child(gameId);
+        .child(gameId)
+        .child('listenableData');
 
     gameRef.child('Users').update({
       curentUser.uid: {
